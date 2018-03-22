@@ -27,7 +27,7 @@ volumes:
   www:
     driver: local-persist
     driver_opts:
-      mountpoint: ${PWD}/www
+      mountpoint: ${PWD}/www_test
   logs:
     driver: local-persist
     driver_opts:
