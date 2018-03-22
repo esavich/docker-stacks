@@ -27,11 +27,11 @@ volumes:
   www:
     driver: local-persist
     driver_opts:
-      mountpoint: ${PWD}/www_test
+      mountpoint: /var/www/docker/${DOMAIN}/www_test
   logs:
     driver: local-persist
     driver_opts:
-      mountpoint: ${PWD}/logs
+      mountpoint: /var/www/docker/${DOMAIN}/logs
 networks:
   web:
     external:
