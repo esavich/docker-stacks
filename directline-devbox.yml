@@ -10,7 +10,7 @@ services:
       - "traefik.frontend.rule=HostRegexp:${DOMAIN}.dev2.directline.pro,{subdomain:.*}.${DOMAIN}.dev2.directline.pro"
       - "traefik.frontend.auth.basic=${BASIC_AUTH_USERS}"
     volumes:
-      - "./php.ini:/usr/local/etc/php/conf.d/90-user.ini"
+      - "/var/www/docker/global_config/php.ini:/usr/local/etc/php/conf.d/90-user.ini"
       - "www:/var/www/html"
       - "logs:/var/log"
     deploy:
@@ -27,7 +27,7 @@ volumes:
   www:
     driver: local-persist
     driver_opts:
-      mountpoint: /var/www/docker/${DOMAIN}/www_test
+      mountpoint: /var/www/docker/${DOMAIN}/www
   logs:
     driver: local-persist
     driver_opts:
