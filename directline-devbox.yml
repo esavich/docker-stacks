@@ -4,6 +4,7 @@ services:
   www:
     build: ./php
     image: foritel/php:7.0-apache-ext
+    user: "tech:www-data"
     networks:
       - web
     labels:
@@ -11,6 +12,7 @@ services:
       - "traefik.frontend.auth.basic=${BASIC_AUTH_USERS}"
     volumes:
       - "/var/www/docker/global_config/php.ini:/usr/local/etc/php/conf.d/90-user.ini"
+      - "/etc/passwd:/etc/passwd:ro"
       - "www:/var/www/html"
       - "logs:/var/log"
     deploy:
