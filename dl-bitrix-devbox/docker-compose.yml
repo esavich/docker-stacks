@@ -1,0 +1,40 @@
+version: '3.3'
+
+services:
+  www:
+    build: ./php
+    image: foritel/php:7.0-apache-ext
+    command: chmod -R 2775 /var/www/html && apache2 -D FOREGROUND
+    networks:
+      - web
+    labels:
+      - "traefik.frontend.rule=HostRegexp:${DOMAIN}.dev2.directline.pro,{subdomain:.*}.${DOMAIN}.dev2.directline.pro"
+      - "traefik.frontend.auth.basic=${BASIC_AUTH_USERS}"
+    volumes:
+      - "/var/www/docker/global_config/php.ini:/usr/local/etc/php/conf.d/90-user.ini"
+      - "/etc/passwd:/etc/passwd:ro"
+      - "www:/var/www/html"
+      - "logs:/var/log"
+    deploy:
+      resources:
+        limits:
+          cpus: '0.75'
+          memory: 1024M
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 1
+        window: 120s
+volumes:
+  www:
+    driver: local-persist
+    driver_opts:
+      mountpoint: /var/www/docker/${DOMAIN}/www
+  logs:
+    driver: local-persist
+    driver_opts:
+      mountpoint: /var/www/docker/${DOMAIN}/logs
+networks:
+  web:
+    external:
+      name: traefik_overlay
