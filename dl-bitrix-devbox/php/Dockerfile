@@ -1,4 +1,5 @@
 FROM php:7.0-apache as builder
+LABEL maintainer="Denis Pigalov <foritel@gmail.com>"
 WORKDIR /tmp
 RUN apt-get update && apt-get install -y \
 		libfreetype6-dev \
@@ -15,10 +16,5 @@ RUN chmod u+x ./composer-installer.sh \
 	&& ./composer-installer.sh \
 	&& mv ./composer.phar /usr/local/bin/composer
 WORKDIR /var/www/html
-RUN composer -v
-
-FROM php:7.0-apache
-LABEL maintainer="Denis Pigalov <foritel@gmail.com>"
-COPY --from=builder /usr/local/bin/composer /usl/local/bin/composer
 RUN chmod -R 2775 /var/www/html \
 	&& echo "<?php phpinfo();?>" > index.php
