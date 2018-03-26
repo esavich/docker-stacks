@@ -20,3 +20,4 @@ RUN composer -v
 FROM php:7.0-apache
 LABEL maintainer="Denis Pigalov <foritel@gmail.com>"
 COPY --from=builder /usr/local/bin/composer /usl/local/bin/composer
+RUN chmod -R 2775 /var/www/html
