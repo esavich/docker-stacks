@@ -13,7 +13,7 @@ services:
       - "/var/www/docker/global_config/php.ini:/usr/local/etc/php/conf.d/90-user.ini"
       - "/etc/passwd:/etc/passwd:ro"
       - "www:/var/www/html"
-      - "logs:/var/log"
+#      - "logs:/var/log"
     deploy:
       resources:
         limits:
@@ -29,10 +29,10 @@ volumes:
     driver: local-persist
     driver_opts:
       mountpoint: /var/www/docker/${DOMAIN}/www
-  logs:
-    driver: local-persist
-    driver_opts:
-      mountpoint: /var/www/docker/${DOMAIN}/logs
+#  logs:
+#    driver: local-persist
+#    driver_opts:
+#      mountpoint: /var/www/docker/${DOMAIN}/logs
 networks:
   web:
     external:
