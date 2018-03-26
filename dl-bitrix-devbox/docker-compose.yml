@@ -3,7 +3,7 @@ version: '3.3'
 services:
   www:
     build: ./php
-    image: foritel/php:7.0-apache-ext
+    image: foritel/php:7.0-apache-dev
     command: chmod -R 2775 /var/www/html && apache2 -D FOREGROUND
     networks:
       - web
