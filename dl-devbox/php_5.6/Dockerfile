@@ -1,4 +1,4 @@
-FROM php:7.0-apache as builder
+FROM php:5.6-apache as builder
 LABEL maintainer="Denis Pigalov <foritel@gmail.com>"
 WORKDIR /tmp
 RUN apt-get update && apt-get install -y \
@@ -8,7 +8,7 @@ RUN apt-get update && apt-get install -y \
 		libpng-dev \
 		sendmail \
 		wget \
-	&& docker-php-ext-install -j$(nproc) mcrypt opcache pdo_mysql mysqli zip \
+	&& docker-php-ext-install -j$(nproc) mcrypt opcache pdo_mysql mysql zip \
 	&& docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
 	&& docker-php-ext-install -j$(nproc) gd
 COPY ./composer-installer.sh ./composer-installer.sh
@@ -19,3 +19,5 @@ WORKDIR /var/www/html
 RUN echo "<?php phpinfo();?>" > index.php && chown www-data:www-data index.php \
 	&& chmod -R 2775 /var/www/html \
 	&& setfacl -Rdm u::rwX,g::rwX,o::rX,m::rwX,g:www-data:rwX /var/www/html \
+EXPOSE 80
+CMD ["apache2-foreground"]

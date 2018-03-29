@@ -2,8 +2,8 @@ version: '3.3'
 
 services:
   www:
-    build: ./php
-    image: foritel/php:7.0-apache-bitrix
+    build: ./php_${PHP_VERSION:-7.0}_bitrix
+    image: foritel/php:${PHP_VERSION:-7.0}-apache-bitrix
     networks:
       - web
     labels:
@@ -31,11 +31,11 @@ volumes:
   www:
     driver: local-persist
     driver_opts:
-      mountpoint: /var/www/docker/${DOMAIN}/www
+      mountpoint: /var/www/docker/${DOMAIN:-null}/www
 #  logs:
 #    driver: local-persist
 #    driver_opts:
-#      mountpoint: /var/www/docker/${DOMAIN}/logs
+#      mountpoint: /var/www/docker/${DOMAIN:-null}/logs
 networks:
   web:
     external:
