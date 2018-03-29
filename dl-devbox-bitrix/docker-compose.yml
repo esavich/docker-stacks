@@ -3,7 +3,7 @@ version: '3.3'
 services:
   www:
     build: ./php
-    image: foritel/php:7.0-apache-dev
+    image: foritel/php:7.0-apache-bitrix
     networks:
       - web
     labels:
@@ -15,7 +15,8 @@ services:
       - "www:/var/www/html"
 #      - "logs:/var/log"
     environment:
-      - BITRIX_REDACTION=${BITRIX_REDACTION:-START}
+      - BITRIX_REDACTION=${BITRIX_REDACTION:-start}
+    command: /var/www/html/bitrix-installer.sh > /dev/null 2>&1 || apache2-foreground
     deploy:
       resources:
         limits:
