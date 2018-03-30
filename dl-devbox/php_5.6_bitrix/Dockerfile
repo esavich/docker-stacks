@@ -19,6 +19,7 @@ WORKDIR /var/www/html
 RUN chmod -R 2775 /var/www/html \
 	&& setfacl -Rdm u::rwX,g::rwX,o::rX,m::rwX,g:www-data:rwX /var/www/html
 COPY ./bitrix-installer.sh ./bitrix-installer.sh
+COPY ./stub.php ./index.php
 RUN chmod u+x ./bitrix-installer.sh
 EXPOSE 80
 CMD ["apache2-foreground"]
