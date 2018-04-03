@@ -16,7 +16,7 @@ services:
 #      - "logs:/var/log"
     environment:
       - BITRIX_REDACTION=${BITRIX_REDACTION:-start}
-    command: /var/www/html/bitrix-installer.sh > /dev/null 2>&1 || apache2-foreground
+    command: "/var/www/html/bitrix-installer.sh > /dev/null 2>&1 || apache2-foreground"
     deploy:
       resources:
         limits:
