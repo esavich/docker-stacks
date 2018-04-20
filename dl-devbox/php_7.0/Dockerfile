@@ -16,8 +16,9 @@ RUN chmod u+x ./composer-installer.sh \
 	&& ./composer-installer.sh \
 	&& mv ./composer.phar /usr/local/bin/composer
 WORKDIR /var/www/html
-RUN echo "<?php phpinfo();?>" > index.php && chown www-data:www-data index.php \
+RUN a2enmod rewrite \
+	&& echo "<?php phpinfo();?>" > index.php && chown www-data:www-data index.php \
 	&& chmod -R 2775 /var/www/html \
-	&& setfacl -Rdm u::rwX,g::rwX,o::rX,m::rwX,g:www-data:rwX /var/www/html \
+	&& setfacl -Rdm u::rwX,g::rwX,o::rX,m::rwX,g:www-data:rwX /var/www/html
 EXPOSE 80
 CMD ["apache2-foreground"]

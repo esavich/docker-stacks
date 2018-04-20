@@ -16,7 +16,8 @@ RUN chmod u+x ./composer-installer.sh \
 	&& ./composer-installer.sh \
 	&& mv ./composer.phar /usr/local/bin/composer
 WORKDIR /var/www/html
-RUN chmod -R 2775 /var/www/html \
+RUN a2enmod rewrite \
+	&& chmod -R 2775 /var/www/html \
 	&& setfacl -Rdm u::rwX,g::rwX,o::rX,m::rwX,g:www-data:rwX /var/www/html
 COPY ./bitrix-installer.sh ./bitrix-installer.sh
 COPY ./stub.php ./index.php

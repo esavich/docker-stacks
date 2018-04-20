@@ -10,6 +10,7 @@ services:
       - "traefik.frontend.rule=HostRegexp:${DOMAIN}.dev2.directline.pro,{subdomain:.*}.${DOMAIN}.dev2.directline.pro"
       - "traefik.frontend.auth.basic=${BASIC_AUTH_USERS}"
     volumes:
+      - "/var/www/docker/global_config/bin/mhsendmail:/usr/sbin/sendmail"
       - "/var/www/docker/global_config/php.ini:/usr/local/etc/php/conf.d/90-user.ini"
       - "/etc/passwd:/etc/passwd:ro"
       - "www:/var/www/html"
