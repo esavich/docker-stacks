@@ -3,7 +3,7 @@ version: '3.3'
 services:
   www:
     build: ./php_${PHP_VERSION:-7.0}
-    image: foritel/php:${PHP_VERSION:-7.0}-apache-dev
+    image: directlinepro/php:${PHP_VERSION:-7.0}-apache-dev
     networks:
       - web
     labels:

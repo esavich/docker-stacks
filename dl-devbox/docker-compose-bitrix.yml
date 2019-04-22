@@ -3,7 +3,7 @@ version: '3.3'
 services:
   www:
     build: ./php_${PHP_VERSION:-7.0}_bitrix
-    image: foritel/php:${PHP_VERSION:-7.0}-apache-bitrix
+    image: directlinepro/php:${PHP_VERSION:-7.0}-apache-bitrix
     networks:
       - web
     labels:
